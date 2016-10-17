@@ -3,9 +3,10 @@ function [ s ] = sun( )
     s.baseIrradiance = 1000; %W/m^2
     s.getIrradiance = @getIrradiance;
     s.getSolarAngle = @getSolarAngle;
+    s.dni           = load('data/DNI/dni.mat');
     
     function [i] = getIrradiance (t, day)
-        i = s.baseIrradiance;
+        i = s.dni(find(s.dni(:,2) == day & s.dni(:,3) == t,1),7);
     end
     
     function [az,el] = getSolarAngle(t, day)
