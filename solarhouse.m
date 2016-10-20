@@ -9,11 +9,13 @@ function solarhouse()
     end
   
     
-    [t,U] = ode45(@flow, [0, 240], h.getEnergy(290));
+    [t,U] = ode45(@flow, [0, 24*364], h.getEnergy(290));
+    t = t./24;
     Temp = h.getTemp(U);
+    Temp = Temp - 273;
     plot(t,Temp,'r*-');
-    xlabel('Time (hours)');
-    ylabel('Temperature (K)');
+    xlabel('Time (days)');
+    ylabel('Temperature (C)');
     title('House Temperature Over Time');
 
 end
