@@ -13,6 +13,7 @@ function [ h ] = house( )
     h.conduction = 2; %W/mK
     h.getTemp = @getTemp;
     h.getEnergy = @getEnergy;
+    h.getExposedArea = @getExposedArea;
     
     function [t] = getTemp(energy)
         t = energy./h.heatCapacity;
@@ -20,6 +21,14 @@ function [ h ] = house( )
 
     function [u] = getEnergy(temp)
         u = temp.*h.heatCapacity;
+    end
+
+    function [a] = getExposedArea(elevation,controlLength)
+        if sin(elevation) > 0
+            a = h.length*min(sin(elevation)*(h.height-controlLength),h.width);
+        else
+            a = 0;
+        end
     end
 end
 
