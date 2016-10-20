@@ -4,8 +4,9 @@ function solarhouse()
     e = environment();
     function theflow = flow(t, U)
         deltaT = h.getTemp(U)-e.getTemp(t, 0); %TODO: Fix day of year
-        theflow = (s.getIrradiance(t, 0)*h.getExposedArea(s.getSolarAngle(mod(t,24),floor(t/24)),0))-(h.convection*h.area*deltaT)...
-        -(((h.conduction*h.area)/h.thickness)*deltaT);
+        theflow = (s.getIrradiance(t, 0)*h.getExposedArea(s.getSolarAngle(mod(t,24),floor(t/24)),0))...
+        -(((h.conductionInsulation*h.areaInsulation)/h.thicknessInsulation)*deltaT)...
+        -(((h.conductionGlass*h.areaGlass)/h.thicknessGlass)*deltaT);
     end
   
     
