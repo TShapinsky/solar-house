@@ -27,9 +27,9 @@ function [ h ] = house( )
         u = temp.*h.heatCapacity;
     end
 
-    function [a] = getExposedArea(elevation,controlLength)
+    function [a] = getExposedArea(elevation,control, houseTemp)
         if sin(elevation) > 0
-            a = h.length*min(sin(elevation)*(h.height-controlLength),h.width);
+            a = h.length*min(sin(elevation)*(h.height-h.height*control.getLength(houseTemp, 294)),h.width)
         else
             a = 0;
         end
