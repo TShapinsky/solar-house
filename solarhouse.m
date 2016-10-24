@@ -10,7 +10,7 @@ function solarhouse()
         sunFlow = (s.getIrradiance(t, 0)*h.getExposedArea(s.getSolarAngle(mod(t,24),floor(t/24)),0));
         houseFlow = sunFlow*tm.albedo...
         -(((h.conductionInsulation*h.areaInsulation)/h.thicknessInsulation)*deltaT)...
-        -(((h.conductionGlass*h.areaGlass)/h.thicknessGlass)*deltaT)...
+        -(h.RGlass*deltaT*h.areaGlass)...
         -convectionTmH;
         tmFlow = sunFlow*(1-tm.albedo)...
             + convectionTmH;
@@ -18,7 +18,7 @@ function solarhouse()
     end
   
     
-    [t,U] = ode45(@flow, [0, 24*180], [h.getEnergy(290),tm.getEnergy(300)]);
+    [t,U] = ode45(@flow, [0, 24*364], [h.getEnergy(290),tm.getEnergy(300)]);
 
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];

@@ -14,6 +14,7 @@ function [ h ] = house( )
     h.convection = 100; %W/m^2*K
     h.conductionInsulation = .029; %W/mK
     h.conductionGlass      = 1.05; %W/mK
+    h.RGlass = 12.5^-1; %W/Km^2
     h.getTemp = @getTemp;
     h.getEnergy = @getEnergy;
     h.getExposedArea = @getExposedArea;
