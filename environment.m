@@ -7,7 +7,7 @@ function [ env ] = environment( )
     env.dni      = env.dni.dni;
     
     function [temp] = getTemp(t,d)
-        temp = 270 + env.dni(find(env.dni(:,2) == floor(d + floor(t/24)) & env.dni(:,3) == floor(mod(t,24)),1),13);
+        temp = 270 + env.dni(find(env.dni(:,2) == mod(floor(d + floor(t/24)),364) & env.dni(:,3) == floor(mod(t,24)),1),13);
     end
 end
 

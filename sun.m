@@ -8,7 +8,7 @@ function [ s ] = sun( )
     s.dni           = s.dni.dni;
     
     function [i] = getIrradiance (t, d)
-        i = s.dni(find(s.dni(:,2) == floor(d + floor(t/24)) & s.dni(:,3) == floor(mod(t,24)),1),7);
+        i = s.dni(find(s.dni(:,2) == mod(floor(d + floor(t/24)),364) & s.dni(:,3) == floor(mod(t,24)),1),7);
     end
     
     function [el] = getSolarAngle(t, day)

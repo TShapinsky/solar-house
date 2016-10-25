@@ -19,7 +19,7 @@ function solarhouse()
     end
   
     
-    [t,U] = ode45(@flow, [0, 24*364], [h.getEnergy(294),tm.getEnergy(294)]);
+    [t,U] = ode45(@flow, [0, 24*700], [h.getEnergy(294),tm.getEnergy(294)]);
 
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
