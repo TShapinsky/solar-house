@@ -3,8 +3,8 @@ function [c] = control()
     c.length = nan;
     c.getLength = @getLength;
     
-    function[l] = getLength(houseTemp, desiredTemp)
-        if isnan(c.length)         
+    function[l] = getLength(self,houseTemp, desiredTemp)
+        if isnan(self.length)
             if houseTemp > desiredTemp
                 l = 1;
             else if houseTemp == desiredTemp
@@ -14,7 +14,7 @@ function [c] = control()
                 end
             end
         else
-            l=c.length;
+            l=self.length;
         end
     end
 
