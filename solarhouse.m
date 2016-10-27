@@ -18,18 +18,29 @@ function solarhouse()
         flows = [houseFlow;tmFlow];
     end
   
-    
-    [t,U] = ode45(@flow, [0, 24*700], [h.getEnergy(294),tm.getEnergy(294)]);
+    days = 0:7:364;
+    lengths = 0:0.1:1;
+    tempMat = zeros(length(days)-1,length(lengths));
+    for d = 1:(length(days)-1)
+        for l = 1:length(lengths)
+            c.length = lengths(l);
+            [t,U] = ode45(@flow, [24*days(d),24*days(d+1)], [h.getEnergy(294),tm.getEnergy(294)]);
+            temp = h.getTemp(U(:,1));
+            tempMat(d,l) = range(temp);
+        end
+    end
 
-    t = t./24;
-    Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
-    Temp = Temp - 273;
-    plot(t,Temp(:,1),'r*-');
-    hold on;
-    plot(t,Temp(:,2),'b*-');
-    hold off;
-    xlabel('Time (days)');
-    ylabel('Temperature (C)');
-    title('House Temperature Over Time');
+    imagesc(days(1:length(days)-1),lengths,tempMat');
+
+%     t = t./24;
+%     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
+%     Temp = Temp - 273;
+%     plot(t,Temp(:,1),'r*-');
+%     hold on;
+%     plot(t,Temp(:,2),'b*-');
+%     hold off;
+%     xlabel('Time (days)');
+%     ylabel('Temperature (C)');
+%     title('House Temperature Over Time');
 
 end
