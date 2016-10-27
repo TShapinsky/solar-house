@@ -25,12 +25,12 @@ function solarhouse()
         for l = 1:length(lengths)
             c.length = lengths(l);
             [t,U] = ode45(@flow, [24*days(d),24*days(d+1)], [h.getEnergy(294),tm.getEnergy(294)]);
-            temp = h.getTemp(U(:,1));
-            tempMat(d,l) = range(temp);
+            temp = h.getTemp(U(:,1))-294;
+            tempMat(d,l) = trapz(t,temp)/30;
         end
     end
 
-    contourf(days(1:length(days)-1),lengths,tempMat');
+    imagesc(days(1:length(days)-1),lengths,tempMat');
 
 %     t = t./24;
 %     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
