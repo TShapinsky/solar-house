@@ -18,7 +18,7 @@ function solarhouse()
         flows = [houseFlow;tmFlow];
     end
   
-    days = 0:7:364;
+    days = 0:30:364;
     lengths = 0:0.1:1;
     tempMat = zeros(length(days)-1,length(lengths));
     for d = 1:(length(days)-1)
@@ -30,7 +30,7 @@ function solarhouse()
         end
     end
 
-    imagesc(days(1:length(days)-1),lengths,tempMat');
+    contourf(days(1:length(days)-1),lengths,tempMat');
 
 %     t = t./24;
 %     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
