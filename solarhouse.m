@@ -37,6 +37,7 @@ function solarhouse()
     pcolor(days(1:length(days)-1),lengths,tempMat');
     colormap(heatmap(tempMat));
     cb = colorbar;
+    title(cb, 'Avg. Temp Error (\circ C)');
 %     [t,U] = ode45(@flow, [100*24, 24*110], [h.getEnergy(294),tm.getEnergy(294)]);
 %     times = times./24;
 %     lengths = lengths.*100;
