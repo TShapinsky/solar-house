@@ -48,11 +48,17 @@ function solarhouse()
     ylabel('Temperature (C)');
     yyaxis right
     max(lengths)
-    plot(times,lengths,'LineWidth',2);
+    %plot(times,lengths,'LineWidth',2);
+    lengths = [max(lengths) lengths min(lengths)];
+    times = [min(times) times min(times)];
+    h = fill(times, lengths, 'g');
+    set(h,'facealpha',.2)
+    hatchfill(h);
     axis([min(t),max(t),0,100]);
     ylabel('Control coverage (%)');
     hold off;
     xlabel('Time (days)');
     title('House Temperature Over Time');
+    legend('Temp in House', 'Temp in Thermal Mass', 'Control is extended');
 
 end

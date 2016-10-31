@@ -8,7 +8,7 @@ function [c] = control()
             if houseTemp > desiredTemp
                 l = 1;
             else if houseTemp == desiredTemp
-                l = .5;
+                l = 1;
             else 
                 l = 0;
                 end
