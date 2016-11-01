@@ -52,7 +52,7 @@ function solarhouse()
     %plot(times,lengths,'LineWidth',2);
     lengths = [min(lengths) lengths min(lengths)];
     times = [min(times) times max(times)];
-    h = fill(times, lengths, 'g');
+    h = fill(times, lengths, [0 .68 .937]);
     set(h,'facealpha',.2)
     axis([min(t),max(t),0,100]);
     ylabel('Control coverage (%)');
