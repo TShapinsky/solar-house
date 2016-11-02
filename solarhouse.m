@@ -42,20 +42,20 @@ function solarhouse()
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
     Temp = Temp - 273;
-    yyaxis left
+    %yyaxis left
     plot(t,Temp(:,1),'r-','LineWidth',2);
     hold on;
     plot(t,Temp(:,2),'b-','LineWidth',2);
     ylabel('Temperature (C)');
-    yyaxis right
+    %yyaxis right
     max(lengths)
     %plot(times,lengths,'LineWidth',2);
     lengths = [min(lengths) lengths min(lengths)];
     times = [min(times) times max(times)];
     h = fill(times, lengths, [0 .68 .937]);
     set(h,'facealpha',.2)
-    axis([min(t),max(t),0,100]);
-    ylabel('Control coverage (%)');
+    axis([min(t),max(t),20.92,21.04]);
+    %ylabel('Control coverage (%)');
     hold off;
     xlabel('Time (days)');
     title('House Temperature Over Time');
