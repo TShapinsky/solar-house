@@ -4,6 +4,7 @@ function solarhouse()
     e = environment();
     tm = thermalMass(h);
     c = control();
+    E = [];
     function flows = flow(t, U)
         deltaT = h.getTemp(U(1))-e.getTemp(t, 0); %TODO: Fix day of year
         deltaTTmH = h.getTemp(U(1)) - tm.getTemp(U(2));
@@ -15,18 +16,20 @@ function solarhouse()
         -convectionTmH;
         tmFlow = sunFlow*(1-tm.albedo)...
             + convectionTmH;
+        %E = [E; e.getTemp];
         flows = [houseFlow;tmFlow];
     end
   
-    
-    [t,U] = ode45(@flow, [0, 24*364], [h.getEnergy(294),tm.getEnergy(294)]);
+    options = odeset('MaxStep',1);
+    [t,U] = ode45(@flow, [0, 24*364], [h.getEnergy(294),tm.getEnergy(294)], options);
 
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
     Temp = Temp - 273;
-    plot(t,Temp(:,1),'r*-');
+    plot(t,Temp(:,1),'r-');
     hold on;
-    plot(t,Temp(:,2),'b*-');
+    plot(t,Temp(:,2),'b-');
+    %plot(t,E,'g*-');
     hold off;
     xlabel('Time (days)');
     ylabel('Temperature (C)');
