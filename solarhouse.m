@@ -23,6 +23,12 @@ function solarhouse()
     options = odeset('MaxStep',1);
     [t,U] = ode45(@flow, [0, 24*364], [h.getEnergy(294),tm.getEnergy(294)], options);
 
+    outside = zeros(length(t),1);
+    for i=1:length(t)
+        outside(i) = e.getTemp(t(i),0)-270;
+    end
+    plot(t,outside,'o-');
+    hold on;
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
     Temp = Temp - 273;
@@ -34,7 +40,7 @@ function solarhouse()
     xlabel('Time (days)');
     ylabel('Temperature (C)');
     title('House Temperature Over Time');
-    legend('House Temperature', 'Thermal Mass Temperature');
+    legend('Outside Temperature', 'House Temperature', 'Thermal Mass Temperature');
     axis([0 400 18 25]);
 
 end
