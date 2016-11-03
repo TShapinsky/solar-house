@@ -26,9 +26,9 @@ function solarhouse()
     t = t./24;
     Temp = [h.getTemp(U(:,1)),tm.getTemp(U(:,2))];
     Temp = Temp - 273;
-    plot(t,Temp(:,1),'r-');
+    plot(t,Temp(:,1),'r-','LineWidth',2);
     hold on;
-    plot(t,Temp(:,2),'b-');
+    plot(t,Temp(:,2),'b-','LineWidth',2);
     %plot(t,E,'g*-');
     hold off;
     xlabel('Time (days)');
