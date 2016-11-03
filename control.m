@@ -6,9 +6,9 @@ function [c] = control()
     function[l] = getLength(houseTemp, desiredTemp)
         if isnan(c.length)         
             if houseTemp > desiredTemp
-                l = 0;
+                l = 1;
             else if houseTemp == desiredTemp
-                l = 0;
+                l = .5;
             else 
                 l = 0;
                 end
