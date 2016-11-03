@@ -32,5 +32,6 @@ function solarhouse()
     ylabel('Temperature (C)');
     title('House Temperature Over Time');
     legend('House Temperature', 'Thermal Mass Temperature');
+    axis([0 400 18 25]);
 
 end
